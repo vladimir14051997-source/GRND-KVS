@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "GRND.GG | Жалобы",
+  "version": "3.1",
+  "description": "Управление шаблонами ответов и мониторинг жалоб со звуковыми уведомлениями",
+  "author": "Flovers",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications",
+    "tabs",
+    "scripting",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://grnd.gg/*",
+    "https://*.grnd.gg/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GRND.GG Жалобы",
+    "default_icon": {
+      "16": "icons/grndlogo.png",
+      "48": "icons/grndlogo.png",
+      "128": "icons/grndlogo.png"
+    }
+  },
+  "icons": {
+    "16": "icons/grndlogo.png",
+    "48": "icons/grndlogo.png",
+    "128": "icons/grndlogo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://grnd.gg/admin/complaints*", "https://grnd.gg/*complaints*"],
+      "js": ["content.js", "mobile-content.js"],
+      "css": ["mobile-styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "grnd-complaints@flovers",
+      "strict_min_version": "109.0"
+    }
+  }
+}

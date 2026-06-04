@@ -1,0 +1,364 @@
+body {
+    background-color: #1d1f20;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container {
+    width: 800px;
+    height: 550px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+.subtext {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 24px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #a6801d;
+    padding-bottom: 10px;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.tab-button:hover {
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.tab-button.active {
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid #a6801d;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.template-list-header,
+.template {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.template-list-header {
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom: 1px solid #a6801d;
+    margin-bottom: 10px;
+}
+
+.template-column,
+.template-name,
+.template-description,
+.template-text {
+    width: 20%;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#templates, #punishmentsList {
+    margin-bottom: 20px;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.template {
+    background-color: #1d1f20;
+    border: 2px solid #a6801d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.template-name,
+.template-description,
+.template-text {
+    background-color: #181a1b;
+    color: white;
+    border: none;
+    font-size: 14px;
+    resize: none;
+    overflow-y: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.delete-button:hover {
+    background-color: #ff0000;
+}
+
+textarea {
+    width: calc(100% - 22px);
+    height: 50px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    resize: none;
+}
+
+.add-template-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.add-template-button:hover {
+    background-color: #45a049;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.close, .close-punishment-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close-punishment-modal:hover,
+.close:focus, .close-punishment-modal:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.save-template-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.save-template-button:hover {
+    background-color: #45a049;
+}
+
+.settings-section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.settings-section h3 {
+    margin: 0 0 15px 0;
+    color: #ffd700;
+    font-size: 16px;
+}
+
+.setting-item {
+    margin-bottom: 15px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+    font-size: 13px;
+}
+
+.setting-item input[type="text"],
+.setting-item input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    background: #2d2f30;
+    border: 1px solid #a6801d;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.setting-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.hint {
+    font-size: 10px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.test-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.test-button:hover {
+    background: #5a6fd6;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-on {
+    background-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+}
+
+.status-off {
+    background-color: #ff4d4d;
+}
+
+#monitoringStatus, #lastComplaintInfo {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* Дополнительные стили для кнопок */
+.template-name, .template-description, .template-text {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.template-name:hover, .template-description:hover, .template-text:hover {
+    background: #2a2c2d;
+}
+
+.delete-button {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+#punishmentsList .template {
+    display: flex;
+    gap: 10px;
+}
+
+#punishmentsList .template-name {
+    width: 25%;
+}
+
+#punishmentsList .template-description {
+    width: 35%;
+}
+
+#punishmentsList .template-text {
+    width: 25%;
+}
+/* Стили для кнопок теста */
+#testSoundBtn, #testNotificationBtn {
+    transition: all 0.3s ease;
+}
+
+#testSoundBtn:hover, #testNotificationBtn:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}

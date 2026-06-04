@@ -1,0 +1,150 @@
+/* mobile-styles.css - Стили для мобильных устройств и планшетов */
+
+/* Определение типа устройства */
+@media (max-width: 768px) {
+    /* Планшеты и телефоны */
+    
+    /* Основные стили для мобильной версии */
+    body {
+        font-size: 16px;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Плавающее меню для мобильных */
+    #grnd-floating-menu {
+        position: fixed !important;
+        bottom: 20px !important;
+        top: auto !important;
+        right: 20px !important;
+        left: auto !important;
+        width: calc(100% - 40px) !important;
+        max-width: 400px !important;
+        z-index: 10000 !important;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+        backdrop-filter: blur(10px) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Увеличенные кнопки для касаний */
+    #grnd-floating-menu button,
+    .grnd-btn {
+        min-height: 48px !important;
+        padding: 12px 16px !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+    }
+    
+    /* Подменю для мобильных */
+    #grnd-floating-menu .submenu {
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Уведомления для мобильных */
+    .grnd-page-notification {
+        top: auto !important;
+        bottom: 80px !important;
+        right: 20px !important;
+        left: 20px !important;
+        width: auto !important;
+        max-width: none !important;
+        font-size: 14px !important;
+        padding: 20px !important;
+    }
+    
+    /* Тосты для мобильных */
+    .grnd-toast {
+        bottom: 100px !important;
+        right: 20px !important;
+        left: 20px !important;
+        width: auto !important;
+        font-size: 14px !important;
+        padding: 12px 16px !important;
+    }
+    
+    /* Кнопка наказания */
+    #grnd-punishment-btn {
+        padding: 10px 20px !important;
+        font-size: 16px !important;
+        margin-left: 8px !important;
+    }
+    
+    /* Свайп для закрытия меню */
+    #grnd-floating-menu {
+        touch-action: pan-y pinch-zoom;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Телефоны */
+    
+    #grnd-floating-menu {
+        width: calc(100% - 20px) !important;
+        bottom: 10px !important;
+        right: 10px !important;
+        left: 10px !important;
+        border-radius: 20px !important;
+    }
+    
+    .grnd-page-notification {
+        bottom: 70px !important;
+        padding: 16px !important;
+    }
+    
+    .grnd-notification-close {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 24px !important;
+    }
+}
+
+/* Поддержка темной темы */
+@media (prefers-color-scheme: dark) {
+    #grnd-floating-menu {
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%) !important;
+    }
+}
+
+/* Анимации для мобильных */
+@keyframes grndMobileSlideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.grnd-mobile-menu {
+    animation: grndMobileSlideUp 0.3s ease-out !important;
+}
+
+/* Улучшенная читаемость */
+@media (max-width: 768px) {
+    #grnd-floating-menu .template-name,
+    #grnd-floating-menu .template-description {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .info-block {
+        font-size: 12px !important;
+    }
+}
+
+/* Поддержка landscape ориентации */
+@media (max-width: 768px) and (orientation: landscape) {
+    #grnd-floating-menu {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+    
+    .submenu {
+        max-height: 200px !important;
+    }
+}

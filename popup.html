@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <title>GRND.GG | Жалобы</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-container">
+        <img src="icons/grndlogo.png" alt="LOGO" class="logo">
+      </div>
+      <h2>GRND.GG | Редактор Шаблонов</h2>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-button active" data-tab="templates">📝 Шаблоны ответов</button>
+      <button class="tab-button" data-tab="approved">✅ Одобрения</button>
+      <button class="tab-button" data-tab="rejected">❌ Отклонения</button>
+      <button class="tab-button" data-tab="monitoring">🔔 Мониторинг</button>
+    </div>
+
+    <!-- Вкладка: Обычные шаблоны -->
+    <div id="templatesTab" class="tab-content active">
+      <div class="template-list-header">
+        <div class="template-column">Название</div>
+        <div class="template-column">Описание</div>
+        <div class="template-column">Содержание</div>
+        <div class="template-column">Удаление</div>
+      </div>
+      <div id="templates" class="templates"></div>
+      <button id="addTemplate" class="add-template-button">Добавить шаблон</button>
+    </div>
+
+    <!-- Вкладка: Одобрительные шаблоны -->
+    <div id="approvedTab" class="tab-content">
+      <div class="template-list-header">
+        <div class="template-column">Название</div>
+        <div class="template-column">Описание</div>
+        <div class="template-column">Содержание</div>
+        <div class="template-column">Удаление</div>
+      </div>
+      <div id="approvedTemplatesList" class="templates"></div>
+      <button id="addApprovedTemplate" class="add-template-button">➕ Добавить одобрение</button>
+      <div class="hint" style="margin-top: 10px; text-align: center; color: #aaa;">
+        💡 Эти шаблоны появятся в подменю "Одобрена" на странице жалоб
+      </div>
+    </div>
+
+    <!-- Вкладка: Отклонения -->
+    <div id="rejectedTab" class="tab-content">
+      <div class="template-list-header">
+        <div class="template-column">Название</div>
+        <div class="template-column">Описание</div>
+        <div class="template-column">Содержание</div>
+        <div class="template-column">Удаление</div>
+      </div>
+      <div id="rejectedTemplatesList" class="templates"></div>
+      <button id="addRejectedTemplate" class="add-template-button">➕ Добавить отклонение</button>
+      <div class="hint" style="margin-top: 10px; text-align: center; color: #aaa;">
+        💡 Эти шаблоны появятся в подменю "Отклонена" на странице жалоб
+      </div>
+    </div>
+
+    <!-- Вкладка: Мониторинг -->
+       <!-- Вкладка: Мониторинг -->
+    <div id="monitoringTab" class="tab-content">
+      <div class="settings-section">
+        <h3>📡 Мониторинг новых жалоб</h3>
+        
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="enableMonitoring"> 
+            Включить автоматический мониторинг
+          </label>
+          <div class="hint">Расширение будет само обновлять страницу и проверять новые жалобы</div>
+        </div>
+        
+        <div class="setting-item">
+          <label>Интервал проверки (секунды):</label>
+          <input type="number" id="monitoringInterval" min="5" max="60" value="15">
+          <div class="hint">Рекомендуется 10-20 секунд. Страница будет обновляться каждый интервал</div>
+        </div>
+        
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="enableNotifications"> 
+            Показывать уведомления о новых жалобах
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="autoRefresh"> 
+            Автоматически обновлять страницу при каждой проверке
+          </label>
+          <div class="hint">Если выключено - страница не будет обновляться автоматически</div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <button id="manualCheckBtn" class="test-button">🔄 Проверить сейчас</button>
+          <button id="testSoundBtn" class="test-button" style="background: #9b59b6;">🔊 Тест звука</button>
+          <button id="testNotificationBtn" class="test-button" style="background: #e67e22;">🔔 Тест уведомления</button>
+        </div>
+      </div>
+      
+      <div class="settings-section">
+        <h3>📊 Статус мониторинга</h3>
+        <div id="monitoringStatus">
+          <span class="status-dot status-off"></span> Мониторинг выключен
+        </div>
+        <div id="lastComplaintInfo">📊 Ждем первой проверки...</div>
+        <div class="hint" style="margin-top: 8px;">🔄 Страница будет обновляться автоматически каждые N секунд</div>
+      </div>
+      
+      <button id="saveMonitoringBtn" class="add-template-button">💾 Сохранить настройки</button>
+    </div>
+
+  <!-- Модальные окна (остаются без изменений) -->
+  <div id="templateModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalTitle">Добавление нового шаблона</h2>
+      <textarea id="templateName" placeholder="Введите название шаблона.."></textarea>
+      <textarea id="templateDescription" placeholder="Введите описание шаблона.."></textarea>
+      <textarea id="templateText" placeholder="Введите текст шаблона..."></textarea>
+      <button id="saveTemplate" class="save-template-button">Сохранить</button>
+    </div>
+  </div>
+
+  <div id="approvedModal" class="modal">
+    <div class="modal-content">
+      <span class="close-approved-modal">&times;</span>
+      <h2 id="approvedModalTitle">Добавление одобрения</h2>
+      <textarea id="approvedName" placeholder="Название (например: 2.1 ОП (оск))"></textarea>
+      <textarea id="approvedDescription" placeholder="Описание (например: Оскорбление)"></textarea>
+      <textarea id="approvedText" placeholder="Текст ответа... (используйте {complain_from}, {complain_number}, {complain_on})"></textarea>
+      <button id="saveApproved" class="save-template-button">Сохранить</button>
+    </div>
+  </div>
+
+  <div id="rejectedModal" class="modal">
+    <div class="modal-content">
+      <span class="close-rejected-modal">&times;</span>
+      <h2 id="rejectedModalTitle">Добавление отклонения</h2>
+      <textarea id="rejectedName" placeholder="Название (например: 1.2.2 ппж (обрезан скрин))"></textarea>
+      <textarea id="rejectedDescription" placeholder="Описание (например: Обрезанный скриншот)"></textarea>
+      <textarea id="rejectedText" placeholder="Текст ответа... (используйте {complain_from}, {complain_number}, {complain_on})"></textarea>
+      <div class="settings-section">
+        <h3>⚙️ Настройки администратора</h3>
+        
+        <div class="setting-item">
+          <label>Ваше имя (для команды наказания):</label>
+          <input type="text" id="adminNameInput" placeholder="Введите ваше имя">
+          <div class="hint">Будет использоваться в команде: /offban Игрок Срок #Жалоба by [Ваше имя]</div>
+        </div>
+        
+        <button id="saveAdminNameBtn" class="test-button" style="background: #3498db;">💾 Сохранить имя</button>
+        <button id="testPunishmentBtn" class="test-button" style="background: #e67e22;">⚖️ Тест команды</button>
+      </div>
+      <button id="saveRejected" class="save-template-button">Сохранить</button>
+    </div>
+  </div>
+
+  <div id="punishmentModal" class="modal">
+    <div class="modal-content">
+      <span class="close-punishment-modal">&times;</span>
+      <h2 id="punishmentModalTitle">Добавление наказания</h2>
+      <textarea id="punishmentName" placeholder="Название наказания (например: Бан на 7 дней)"></textarea>
+      <textarea id="punishmentDescription" placeholder="Описание наказания"></textarea>
+      <textarea id="punishmentDuration" placeholder="Длительность (например: 7 дней, Навсегда, 30 минут)"></textarea>
+      <button id="savePunishment" class="save-template-button">Сохранить</button>
+    </div>
+  </div>
+
+  <div class="subtext">With love by West | Young ❤️</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

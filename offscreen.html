@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Offscreen для звука</title>
+</head>
+<body>
+    <script>
+        // Универсальный API
+        const runtimeAPI = (typeof chrome !== 'undefined' && chrome.runtime) ? chrome : 
+                           (typeof browser !== 'undefined' && browser.runtime) ? browser : null;
+        
+        function playNotificationSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const audioCtx = new AudioContext();
+                
+                const now = audioCtx.currentTime;
+                
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.frequency.value = 880;
+                gain1.gain.setValueAtTime(0.3, now);
+                gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+                osc1.start(now);
+                osc1.stop(now + 0.2);
+                
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.frequency.value = 660;
+                    gain2.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.2);
+                }, 100);
+                
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                
+                console.log('Звук воспроизведен через offscreen');
+            } catch (error) {
+                console.error('Ошибка воспроизведения звука:', error);
+            }
+        }
+        
+        if (runtimeAPI && runtimeAPI.runtime) {
+            runtimeAPI.runtime.onMessage.addListener((request, sender, sendResponse) => {
+                if (request.action === 'playSound') {
+                    playNotificationSound();
+                    sendResponse({ success: true });
+                }
+                return true;
+            });
+        }
+        
+        console.log('Offscreen документ загружен');
+    </script>
+</body>
+</html>
