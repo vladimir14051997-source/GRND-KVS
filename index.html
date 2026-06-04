@@ -1,22 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GRND.GG Admin</title>
+    <title>GRND.GG | Админ панель жалоб</title>
     <link rel="manifest" href="pwa-manifest.json">
     <link rel="stylesheet" href="pwa-styles.css">
     <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Управление жалобами на GRND.GG с мобильных устройств">
 </head>
 <body>
-    <div id="app">
-        <div class="pwa-container">
-            <h1>GRND.GG Админ панель</h1>
-            <button id="openComplaintsBtn" class="pwa-button">📋 Открыть жалобы</button>
-            <button id="testNotificationBtn" class="pwa-button">🔔 Тест уведомления</button>
-            <div id="status" class="pwa-status"></div>
+    <div class="pwa-container">
+        <div class="logo">
+            <img src="icons/grndlogo.png" alt="GRND.GG" width="80">
+        </div>
+        <h1>GRND.GG Admin</h1>
+        
+        <div class="button-group">
+            <button id="openComplaintsBtn" class="pwa-button primary">
+                📋 Открыть жалобы
+            </button>
+            <button id="openExtensionBtn" class="pwa-button secondary">
+                🔧 Открыть расширение
+            </button>
+            <button id="testNotificationBtn" class="pwa-button test">
+                🔔 Тест уведомления
+            </button>
+        </div>
+        
+        <div id="status" class="pwa-status">
+            <h3>Статус мониторинга</h3>
+            <div id="monitoringStatus">Загрузка...</div>
+        </div>
+        
+        <div class="info">
+            <p>💡 <strong>Как установить на телефон:</strong></p>
+            <ol>
+                <li>Нажмите "Поделиться" → "На экран "Домой""</li>
+                <li>Или в меню браузера выберите "Установить приложение"</li>
+                <li>Расширение будет работать как отдельное приложение!</li>
+            </ol>
         </div>
     </div>
+    
     <script src="pwa-app.js"></script>
 </body>
 </html>
